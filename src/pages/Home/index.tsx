@@ -1,38 +1,39 @@
+import { useContext } from 'react';
 import { Header } from '../../components/Header';
 import { Summary } from '../../components/Summary';
 import { SearchForm } from './components/SearchForm';
 import { PriceColor, TransactionsContainer, TransctionsTable } from './styles';
+import { TransactionContext } from '../../contexts/TransactionsContext';
+import { dataFormatter, priceFormatter } from '../../utils/formatter';
+
 
 export function Home() {
+  const {transactions} = useContext(TransactionContext)
+
   return (
     <div>
       <Header />
       <Summary />
       
       <TransactionsContainer>
-        <SearchForm/>
+        <SearchForm />
         <TransctionsTable>
           <tbody>
-            <tr>
-              <td width="50%">Desenvolvimento de site</td>
-              <td>
-                <PriceColor variant='income'>
-                R$ 12.000,00
-                </PriceColor>
-              </td>
-              <td>Venda</td>
-              <td>13/04/2022</td>
-            </tr>
-            <tr>
-              <td width="50%">Hamburguer</td>
-              <td>
-                <PriceColor variant='outcome'>
-                - R$  59,00
-                </PriceColor>
-              </td>
-              <td>Alimentação</td>
-              <td>13/04/2022</td>
-            </tr>
+            {transactions.map(transaction => {
+              return (
+                <tr key={transaction.id}>
+                  <td width="50%">{transaction.description}</td>
+                  <td>
+                    <PriceColor variant={transaction.type}>
+                      {transaction.type === 'outcome' && '- '}
+                      {priceFormatter.format(transaction.price)}
+                    </PriceColor>
+                  </td>
+                  <td>{transaction.category}</td>
+                  <td>{dataFormatter.format(new Date(transaction.createdAt))}</td>
+                </tr>
+              )
+            })}
           </tbody>
         </TransctionsTable>
       </TransactionsContainer>
