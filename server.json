@@ -23,6 +23,22 @@
       "category": "Educação",
       "price": 1980,
       "createdAt": "2023-05-24T15:10:27.177Z"
+    },
+    {
+      "description": "Desenvolvimento de App",
+      "price": 12000,
+      "category": "Venda",
+      "type": "income",
+      "createdAt": "2023-05-25T15:43:41.681Z",
+      "id": 4
+    },
+    {
+      "description": "Batata Frita",
+      "price": 12,
+      "category": "Alimentação",
+      "type": "outcome",
+      "createdAt": "2023-05-25T16:07:46.832Z",
+      "id": 5
     }
   ]
 }
